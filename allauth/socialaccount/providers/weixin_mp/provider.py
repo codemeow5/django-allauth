@@ -15,8 +15,8 @@ class WeixinAccount(ProviderAccount):
 
 
 class WeixinProvider(OAuth2Provider):
-    id = 'weixin'
-    name = 'Weixin'
+    id = 'weixin_mp'
+    name = 'WeixinMP'
     account_class = WeixinAccount
 
     def extract_uid(self, data):
