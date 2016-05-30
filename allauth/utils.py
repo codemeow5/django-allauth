@@ -51,6 +51,8 @@ def _generate_unique_username_base(txts, regex=None):
 
 
 def get_username_max_length():
+    import pdb
+    pdb.set_trace()
     from .account.app_settings import USER_MODEL_USERNAME_FIELD
     if USER_MODEL_USERNAME_FIELD is not None:
         User = get_user_model()
