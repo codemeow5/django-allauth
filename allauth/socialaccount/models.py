@@ -72,6 +72,10 @@ class SocialApp(models.Model):
                            max_length=191,
                            blank=True,
                            help_text=_('Key'))
+    trade_type = models.CharField(verbose_name='trade type',
+				max_length=30,
+				blank=True,
+				help_text='Be used Weixin')
     # Most apps can be used across multiple domains, therefore we use
     # a ManyToManyField. Note that Facebook requires an app per domain
     # (unless the domains share a common base name).
