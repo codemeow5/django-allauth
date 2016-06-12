@@ -31,11 +31,12 @@ def _process_signup(request, sociallogin):
         # We still need to check the username though...
         if account_settings.USER_MODEL_USERNAME_FIELD:
             username = user_username(sociallogin.user)
-            try:
-                get_account_adapter().clean_username(username)
-            except ValidationError:
-                # This username is no good ...
-                user_username(sociallogin.user, '')
+	    if username:
+            	try:
+            	    get_account_adapter().clean_username(username)
+            	except ValidationError:
+            	    # This username is no good ...
+            	    user_username(sociallogin.user, '')
         # FIXME: This part contains a lot of duplication of logic
         # ("closed" rendering, create user, send email, in active
         # etc..)
