@@ -25,19 +25,31 @@ from ..utils import get_request_param
 
 
 class SocialAppManager(models.Manager):
-    def get_current(self, provider, request=None):
-        cache = {}
-        if request:
-            cache = getattr(request, '_socialapp_cache', {})
-            request._socialapp_cache = cache
-        app = cache.get(provider)
-        if not app:
-            site = get_current_site(request)
-            app = self.get(
-                sites__id=site.id,
-                provider=provider)
-            cache[provider] = app
-        return app
+	def get_current(self, provider, request=None):
+		cache = {}
+		if request:
+			cache = getattr(request, '_socialapp_cache', {})
+			request._socialapp_cache = cache
+		app = cache.get(provider)
+		if not app:
+			site = get_current_site(request)
+			apps = self.filter(
+				sites__id=site.id,
+				provider=provider).all()
+			user_agent = request.META.get('HTTP_USER_AGENT', None)
+			if user_agent is None:
+				app = apps.first()
+			else:
+				for _ in apps:
+					if _.key is not None and \
+						len(_.key) > 0 and \
+						_.key in user_agent:
+						app = _
+						break
+			if app is None:
+				app = apps.first()
+			cache[provider] = app
+		return app
 
 
 @python_2_unicode_compatible
