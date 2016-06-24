@@ -68,6 +68,12 @@ class SocialApp(models.Model):
                               max_length=191,
                               help_text=_('API secret, client secret, or'
                               ' consumer secret'))
+    mch_id = models.CharField(verbose_name=_('MCH ID'),
+                              max_length=191,
+                              help_text=_('MCH ID'))
+    mch_appkey = models.CharField(verbose_name=_('MCH App key'),
+                              max_length=191,
+                              help_text=_('MCH App key'))
     key = models.CharField(verbose_name=_('key'),
                            max_length=191,
                            blank=True,
