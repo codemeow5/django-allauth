@@ -126,6 +126,8 @@ class SocialAccount(models.Model):
                                        auto_now_add=True)
     extra_data = JSONField(verbose_name=_('extra data'), default=dict)
 
+    social_app = models.ForeignKey('SocialApp', verbose_name='social app')
+
     class Meta:
         unique_together = ('provider', 'uid')
         verbose_name = _('social account')

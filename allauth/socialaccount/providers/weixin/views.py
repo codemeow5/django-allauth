@@ -9,6 +9,7 @@ from allauth.socialaccount.providers.oauth2.views import (OAuth2Adapter,
                                                           OAuth2CallbackView)
 from .provider import WeixinProvider
 from .client import WeixinOAuth2Client
+from allauth.socialaccount.models import SocialApp
 
 
 class WeixinOAuth2Adapter(OAuth2Adapter):
